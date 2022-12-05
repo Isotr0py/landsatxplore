@@ -27,19 +27,6 @@ DATA_PRODUCTS = {
     "landsat_etm_c2_l1": "5e83d0d0d2aaa488",
     "landsat_ot_c2_l1": "5e81f14ff4f9941c",
     "landsat_tm_c2_l2": "5e83d11933473426",
-    "landsat_etm_c2_l2": "5e83d12aada2e3c5",
-    "landsat_ot_c2_l2": "5e83d14f30ea90a9",
-    "sentinel_2a": "5e83a42c6eba8084",
-}
-
-DATA_PRODUCTS_II = {
-    "landsat_tm_c1": "5e83d08fd9932768",
-    "landsat_etm_c1": "5e83a507d6aaa3db",
-    "landsat_8_c1": "5e83d0b84df8d8c2",
-    "landsat_tm_c2_l1": "5e83d0a0f94d7d8d",
-    "landsat_etm_c2_l1": "5e83d0d0d2aaa488",
-    "landsat_ot_c2_l1": "5e81f14ff4f9941c",
-    "landsat_tm_c2_l2": "5e83d11933473426",
     "landsat_etm_c2_l2": "5e83d12aed0efa58",
     "landsat_ot_c2_l2": "5e83d14fec7cae84",
     "sentinel_2a": "5e83a42c6eba8084",
@@ -157,14 +144,8 @@ class EarthExplorer(object):
             entity_id = self.api.get_entity_id(identifier, dataset)
         else:
             entity_id = identifier
-        try:
-            url = EE_DOWNLOAD_URL.format(
-                data_product_id=DATA_PRODUCTS[dataset], entity_id=entity_id
-            )
-            filename = self._download(url, output_dir, timeout=timeout, skip=skip)
-        except:
-            url = EE_DOWNLOAD_URL.format(
-                data_product_id=DATA_PRODUCTS_II[dataset], entity_id=entity_id
-            )
-            filename = self._download(url, output_dir, timeout=timeout, skip=skip)
+        url = EE_DOWNLOAD_URL.format(
+            data_product_id=DATA_PRODUCTS[dataset], entity_id=entity_id
+        )
+        filename = self._download(url, output_dir, timeout=timeout, skip=skip)
         return filename
